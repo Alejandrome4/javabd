@@ -1,29 +1,59 @@
 package modelo;
 
-import java.time.LocalDate;
-
+import java.sql.Date;
 public class Usuario {
-    private String correo;
+    private String correoElectronico;
     private String contraseña;
-    private String nombre;
-    private LocalDate fechaNacimiento;
+    private String nombre ;
+    private Date fechaNacimiento;
+    private String tipoUsuario;
 
     public Usuario() {}
 
-    public Usuario(String correo, String contraseña, String nombre, LocalDate fechaNacimiento) {
-        this.correo = correo;
+    public Usuario(String correoElectronico,String contraseña, String nombre, Date fechaNacimiento, String tipoUsuario) {
+        this.correoElectronico = correoElectronico;
         this.contraseña = contraseña;
-        this.nombre= nombre;
+        this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
+        this.tipoUsuario= tipoUsuario;
     }
 
-    public String getCorreo(){ return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
-    public String getContrasenia() { return contraseña; }
-    public void setContraseña(String contrasenia){ this.contraseña = contrasenia; }
-    public String getNombre(){ return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public LocalDate getFechaNacimiento() { return fechaNacimiento; }
-    public void setFechaNacimiento(LocalDate fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
+    public String getCorreoElectronico()
+    { return correoElectronico;
+    }
+    public void setCorreoElectronico(String correoElectronico)
+    { this.correoElectronico = correoElectronico;
+    }
+    public String getPassword()
+    { return contraseña;
+    }
+    public void setPassword(String password)
+    { this.contraseña = password;
+    }
+    public String getNombre()
+    { return nombre;
+    }
+    public void setNombre(String nombre)
+    { this.nombre = nombre;
+    }
+    public Date getFechaNacimiento()
+    { return fechaNacimiento;
+    }
+    public void setFechaNacimiento(Date fechaNacimiento)
+    { this.fechaNacimiento = fechaNacimiento;
+    }
+    public String getTipoUsuario()
+    { return tipoUsuario;
+    }
+    public void setTipoUsuario(String tipoUsuario)
+    { this.tipoUsuario = tipoUsuario;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "correo='" + correoElectronico + '\'' + ", nombre='" + nombre + '\'' + ", tipo='" + tipoUsuario + '\'' + '}';
+    }
 }
+
+
 
