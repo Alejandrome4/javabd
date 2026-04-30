@@ -2,73 +2,69 @@ package modelo;
 
 import java.sql.Date;
 
-
 public class Reserva {
     private int idReserva;
     private Usuario usuario;
     private Recurso recurso;
-    private Date fechaReserva;
-    private String comentarios;
+    private Date fecha;
+    private String horaInicio;
+    private String horaFin;
+    private int numPlazas;
+    private String motivo;
+    private String observaciones;
 
-    public Reserva() {
-    }
-
-    public Reserva(Usuario usuario, Recurso recurso, Date fechaReserva, String comentarios) {
+    public Reserva(Usuario usuario, Recurso recurso, Date fecha, String horaInicio,
+                   String horaFin, int numPlazas, String motivo, String observaciones) {
         this.usuario = usuario;
         this.recurso = recurso;
-        this.fechaReserva = fechaReserva;
-        this.comentarios = comentarios;
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.numPlazas = numPlazas;
+        this.motivo = motivo;
+        this.observaciones = observaciones;
     }
 
-    public Reserva(int idReserva, Usuario usuario, Recurso recurso, Date fechaReserva, String comentarios) {
+
+    public Reserva(int idReserva, Usuario usuario, Recurso recurso, Date fecha, String horaInicio,
+                   String horaFin, int numPlazas, String motivo, String observaciones) {
+        this(usuario, recurso, fecha, horaInicio, horaFin, numPlazas, motivo, observaciones);
         this.idReserva = idReserva;
-        this.usuario = usuario;
-        this.recurso = recurso;
-        this.fechaReserva = fechaReserva;
-        this.comentarios = comentarios;
     }
+
 
     public int getIdReserva() {
         return idReserva;
     }
-    public void setIdReserva(int idReserva) {
-        this.idReserva = idReserva;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Recurso getRecurso() {
         return recurso;
     }
-    public void setRecurso(Recurso recurso) {
-        this.recurso = recurso;
+    public Date getFecha() {
+        return fecha;
     }
-
-    public Date getFechaReserva() {
-        return fechaReserva;
+    public String getHoraInicio() {
+        return horaInicio;
     }
-
-    public void setFechaReserva(Date fechaReserva) {
-        this.fechaReserva = fechaReserva;
+    public String getHoraFin() {
+        return horaFin;
     }
-    public String getComentarios() {
-        return comentarios;
+    public int getNumPlazas() {
+        return numPlazas;
     }
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
+    public String getMotivo()
+    { return motivo;
     }
-
+    public String getObservaciones() {
+        return observaciones;
+    }
 
     @Override
     public String toString() {
-        return "Reserva #" + idReserva + " [" + usuario.getNombre() + " -> " + recurso.getNombre() + " el " + fechaReserva + "]";
+        return String.format("| %-3d | %-15s | %-15s | %-10s | %-5s-%-5s | %-3d |",
+                idReserva, usuario.getNombre(), recurso.getNombre(), fecha, horaInicio, horaFin, numPlazas);
     }
 }
-
 

@@ -80,16 +80,18 @@ public class RecursoDAO {
     }
 
     public void actualizar(Recurso r) throws SQLException {
-        Connection cnx = DBConnection.getConnection();
         String sql = "UPDATE RECURSO SET nombre=?, descripcion=?, ubicacion=?, capacidad=? WHERE id_recurso=?";
-        PreparedStatement ps = cnx.prepareStatement(sql);
-        ps.setString(1, r.getNombre());
-        ps.setString(2, r.getDescripcion());
-        ps.setString(3, r.getUbicacion());
-        ps.setInt(4, r.getCapacidad());
-        ps.setInt(5, r.getIdRecurso());
-        ps.executeUpdate();
-        ps.close();
-        cnx.close();
+        try (Connection cnx = DBConnection.getConnection();
+             PreparedStatement ps = cnx.prepareStatement(sql)) {
+            ps.setString(1, r.getNombre());
+            ps.setString(2, r.getDescripcion());
+            ps.setString(3, r.getUbicacion());
+            ps.setInt(4, r.getCapacidad());
+            ps.setInt(5, r.getIdRecurso());
+            ps.executeUpdate();
+
+            ps.close();
+            cnx.close();
+        }
     }
 }

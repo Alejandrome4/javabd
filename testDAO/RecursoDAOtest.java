@@ -18,7 +18,7 @@ class RecursoDAOTest {
 
     @Test
     void testInsertar() throws SQLException {
-        Recurso r = new Recurso("Aula 111", "Informatica", "Planta 1", 25);
+        Recurso r = new Recurso("Aula 101", "Informatica", "Planta 1", 25);
         int id = dao.insertar(r);
 
         Recurso existe = dao.findByPk(id);

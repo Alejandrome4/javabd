@@ -1,14 +1,13 @@
 package modelo;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Administrador extends Usuario {
-
     public Administrador() {
-        super();
+        setTipoUsuario("ADMIN");
     }
 
-    public Administrador(String correo, String contraseña, String nombre, LocalDate fechaNacimiento) {
-        super(correo, contraseña, nombre, fechaNacimiento);
+    public Administrador(String correo, String contraseña, String nombre, Date fechaNacimiento) {
+        super(correo, contraseña, nombre, fechaNacimiento, "ADMIN");
     }
 }

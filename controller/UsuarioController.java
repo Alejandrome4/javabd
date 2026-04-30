@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioController {
-    private UsuarioDAO dao =new UsuarioDAO();
+    private UsuarioDAO dao = new UsuarioDAO();
 
-    public void insertar(Usuario u) {
+    public boolean insertar(Usuario u) {
         try {
             dao.insertar(u);
-            System.out.println("Usuario guardado.");
+            return true;
         } catch (SQLException e) {
-            System.out.println("Error al guardar: " + e.getMessage());
+            System.out.println("Error en Controller: " + e.getMessage());
+            return false;
         }
     }
 

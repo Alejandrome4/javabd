@@ -35,24 +35,45 @@ public class Recurso {
  public int getIdRecurso() {
   return idRecurso;
  }
+
  public void setIdRecurso(int idRecurso) {
-  this.idRecurso = idRecurso; }
+  this.idRecurso = idRecurso;
+ }
+
  public String getNombre() {
-  return nombre; }
+  return nombre;
+ }
+
  public void setNombre(String nombre) {
-  this.nombre = nombre; }
+  this.nombre = nombre;
+ }
+
  public String getDescripcion() {
-  return descripcion; }
+  return descripcion;
+ }
+
  public void setDescripcion(String descripcion) {
-  this.descripcion = descripcion; }
+  this.descripcion = descripcion;
+ }
+
  public String getUbicacion() {
-  return ubicacion; }
+  return ubicacion;
+ }
+
  public void setUbicacion(String ubicacion) {
-  this.ubicacion = ubicacion; }
+  this.ubicacion = ubicacion;
+
+ }
+
  public int getCapacidad() {
-  return capacidad; }
+  return capacidad;
+
+ }
+
  public void setCapacidad(int capacidad) {
-  this.capacidad = capacidad; }
+  this.capacidad = capacidad;
+
+ }
 
  @Override
  public int hashCode() {
@@ -73,8 +94,7 @@ public class Recurso {
 
  @Override
  public String toString() {
-  return "Recurso{" + "id=" + idRecurso + ", nombre='" + nombre + '\'' +
-          ", ubicacion='" + ubicacion + '\'' + ", capacidad=" + capacidad + '}';
+  return String.format("| %-4d | %-18s | %-15s | %-10d |",
+          idRecurso, nombre, ubicacion, capacidad);
  }
 }
-

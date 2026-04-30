@@ -2,6 +2,8 @@ package testDAO;
 
 import dao.UsuarioDAO;
 import modelo.Usuario;
+import modelo.UsuarioNormal;
+import modelo.Administrador;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +22,14 @@ class UsuarioDAOTest {
     @Test
     void testInsertarYBuscar() throws SQLException {
         String email = "test@prueba.com";
-        Usuario u = new Usuario(email, "6767", "Testear", Date.valueOf("2007-08-03"), "NORMAL");
+        Usuario u = new UsuarioNormal(email, "6767", "Testear", Date.valueOf("2007-08-03"));
 
         dao.insertar(u);
 
         Usuario encontrado = dao.findByEmail(email);
         assertNotNull(encontrado);
         assertEquals("Testear", encontrado.getNombre());
+        assertEquals("NORMAL", encontrado.getTipoUsuario());
 
         dao.eliminar(email);
     }
@@ -34,7 +37,7 @@ class UsuarioDAOTest {
     @Test
     void testEliminar() throws SQLException {
         String email = "borrar@prueba.com";
-        Usuario u = new Usuario(email, "1234", "Borrar", Date.valueOf("2000-01-01"), "NORMAL");
+        Usuario u = new UsuarioNormal(email, "1234", "Borrar", Date.valueOf("2000-01-01"));
 
         dao.insertar(u);
         dao.eliminar(email);

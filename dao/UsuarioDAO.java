@@ -1,10 +1,14 @@
 package dao;
+
+import modelo.Administrador;
 import modelo.Usuario;
+import modelo.UsuarioNormal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
+
     public void insertar(Usuario u) throws SQLException {
         String sql = "INSERT INTO USUARIO (correo_electronico, contraseña, nombre, fecha_nacimiento, tipo_usuario) VALUES (?, ?, ?, ?, ?)";
         try (Connection cnx = DBConnection.getConnection();
@@ -25,13 +29,7 @@ public class UsuarioDAO {
              PreparedStatement ps = cnx.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Usuario(
-                        rs.getString("correo_electronico"),
-                        rs.getString("contraseña"),
-                        rs.getString("nombre"),
-                        rs.getDate("fecha_nacimiento"),
-                        rs.getString("tipo_usuario")
-                ));
+                lista.add(mapearUsuario(rs));
             }
         }
         return lista;
@@ -42,25 +40,38 @@ public class UsuarioDAO {
         try (Connection cnx = DBConnection.getConnection();
              PreparedStatement ps = cnx.prepareStatement(sql)) {
             ps.setString(1, email);
-            try(ResultSet rs = ps.executeQuery()) {
-                if(rs.next()) {
-                    return new Usuario(
-                            rs.getString("correo_electronico"),
-                            rs.getString("contraseña"),
-                            rs.getString("nombre"),
-                            rs.getDate("fecha_nacimiento"),
-                            rs.getString("tipo_usuario")
-                    );
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapearUsuario(rs);
                 }
             }
         }
         return null;
     }
 
+    private Usuario mapearUsuario(ResultSet rs) throws SQLException {
+        String tipo = rs.getString("tipo_usuario");
+        Usuario u;
+
+        if ("ADMIN".equals(tipo)) {
+            u = new Administrador();
+        } else {
+            u = new UsuarioNormal();
+        }
+
+        u.setCorreoElectronico(rs.getString("correo_electronico"));
+        u.setPassword(rs.getString("contraseña"));
+        u.setNombre(rs.getString("nombre"));
+        u.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+        u.setTipoUsuario(tipo);
+
+        return u;
+    }
+
     public void eliminar(String email) throws SQLException {
         String sql = "DELETE FROM USUARIO WHERE correo_electronico = ?";
         try (Connection cnx = DBConnection.getConnection();
-             PreparedStatement ps= cnx.prepareStatement(sql)){
+             PreparedStatement ps = cnx.prepareStatement(sql)) {
             ps.setString(1, email);
             ps.executeUpdate();
         }
