@@ -10,8 +10,7 @@ import ch.qos.logback.classic.Logger;
 
 public class Main {
     public static void main(String[] args) {
-        Logger root = (Logger) LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
-        root.setLevel(Level.INFO);
+        
 
         Scanner sc = new Scanner(System.in);
         int opcion = -1;
