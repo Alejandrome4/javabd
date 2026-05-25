@@ -15,12 +15,12 @@ public class ReservaView {
     public void menu() {
         int opcion;
         do {
-            System.out.println("\n ----- GESTION RESERVAS-----");
+            System.out.println("\n ---- GESTION RESERVAS-----");
             System.out.println("1. Ver todas las reservas");
             System.out.println("2. Crear nueva reserva");
             System.out.println("0. Volver");
             System.out.print("-- OPCIONES: ");
-            try {
+            try{
                 opcion = Integer.parseInt(sn.nextLine());
                 if (opcion == 1) listar();
                 else if (opcion == 2) insertar();
@@ -62,15 +62,12 @@ public class ReservaView {
             System.out.print("Motivo: ");
             String motivo = sn.nextLine();
 
-            // CORRECCIÓN 1: Instanciar clase concreta[cite: 3]
             Usuario u = new UsuarioNormal();
             u.setCorreoElectronico(correo);
 
-            // CORRECCIÓN 2: Instanciar recurso[cite: 4]
             Recurso rec = new Recurso();
             rec.setIdRecurso(idRecurso);
 
-            // CORRECCIÓN 3: Pasar hInicio y hFin como String (sin Time.valueOf)
             Reserva r = new Reserva(0, u, rec, Date.valueOf(fechaStr), hInicio, hFin, plazas, motivo, "");
 
             if (controller.guardar(r)) {
